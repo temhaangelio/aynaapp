@@ -1,0 +1,28 @@
+body {
+  background-color: #000;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  color: #fff;
+}
+h1 {
+  font-size: 20rem;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  min-height: 100vh;
+  gap: 5%;
+}
+.modul {
+  padding: 5%;
+}
+#havadurumu {
+  display: grid;
+  grid-template-columns: repeat(25%);
+}
+#havadurumu .gunler {
+  display: grid;
+  grid-template-columns: repeat(25%);
+}
