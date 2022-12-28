@@ -1,17 +1,7 @@
-import "./App.css";
-import HavaDurumu from "./moduller/HavaDurumu";
+import Router from "./config/Router";
 
 const App = () => {
-  return (
-    <div id="app">
-      <div className="modul">
-        <HavaDurumu />
-      </div>
-      <div className="modul"></div>
-      <div className="modul"></div>
-      <div className="modul"></div>
-    </div>
-  );
+  return <Router />;
 };
 
 export default App;

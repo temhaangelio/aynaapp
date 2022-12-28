@@ -1,0 +1,75 @@
+body {
+  background-color: #000;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  color: #fff;
+  font-size: 1em;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  min-height: 100vh;
+  gap: 5%;
+}
+.modul {
+  padding: 5%;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+#form .logo {
+  margin-bottom: 50px;
+  font-size: 3em;
+  font-weight: bold;
+}
+#form form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+#form input {
+  padding: 15px;
+  width: 300px;
+  margin-bottom: 20px;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+#form label {
+  margin-bottom: 5px;
+}
+#form button {
+  background-color: #000;
+  color: #ffffff;
+  padding: 15px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+#havadurumu h1 {
+  text-align: center;
+  font-size: 15em;
+  line-height: 0px;
+}
+#havadurumu .gunler {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+}
+#havadurumu .gun {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#havadurumu .gun h1 {
+  font-size: 2em;
+}
