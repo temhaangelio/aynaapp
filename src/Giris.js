@@ -1,14 +1,18 @@
 const Giris = () => {
+  const girisYap = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div id="form">
       <div className="logo">ayna</div>
-      <form>
+      <form onSubmit={girisYap}>
         <label>Email Adresiniz</label>
         <input type="text" placeholder="Email Adresiniz"></input>
         <label>Şifreniz</label>
         <input type="password" placeholder="Şifreniz"></input>
-        <button>Giriş</button>
-        <button>Kaydol</button>
+        <button onClick={girisYap}>Giriş</button>
+        <button type="submit">Kaydol</button>
       </form>
     </div>
   );
