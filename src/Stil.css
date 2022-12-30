@@ -53,6 +53,7 @@ body {
   border-radius: 5px;
   font-size: 1em;
   cursor: pointer;
+  font-weight: bold;
 }
 
 #havadurumu h1 {
