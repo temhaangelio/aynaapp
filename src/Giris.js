@@ -10,11 +10,10 @@ const Giris = () => {
     e.preventDefault();
     try {
       await setYukleniyor(true);
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      console.log(data);
       if (error) throw error;
     } catch (error) {
       console.log(error.error_description || error.message);
@@ -27,16 +26,12 @@ const Giris = () => {
     <div id="form">
       <div className="logo">ayna</div>
       <form onSubmit={girisYap}>
-        {email}
-        <label>Email Adresiniz</label>
         <input
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           type="text"
           placeholder="Email Adresiniz"></input>
-        <label>Şifreniz</label>
-        {password}
         <input
           onChange={(e) => {
             setPassword(e.target.value);
@@ -44,9 +39,8 @@ const Giris = () => {
           type="password"
           placeholder="Şifreniz"></input>
         <button onClick={girisYap} style={{ marginBottom: "10px" }}>
-          Giriş
+          {yukleniyor ? "Yükleniyor" : "Giriş"}
         </button>
-        {yukleniyor ? "Yükleniyor" : <button type="submit">Kaydol</button>}
       </form>
     </div>
   );
