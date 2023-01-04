@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap");
 body {
   background-color: #000;
   margin: 0px;
@@ -9,14 +10,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+li {
+  list-style: none;
+}
 
 #app {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 45%);
+  grid-template-columns: repeat(2, 50%);
   min-height: 100vh;
 }
 .modul {
   padding: 5%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
 }
 
 #form {
@@ -62,6 +77,8 @@ body {
   text-align: center;
   font-size: 15em;
   line-height: 0px;
+  font-weight: 900;
+  letter-spacing: -13px;
 }
 #havadurumu .gunler {
   display: grid;
@@ -72,28 +89,75 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-right: 50px;
 }
 #havadurumu .gun h1 {
   font-size: 2em;
+  letter-spacing: 0px;
+}
+#havadurumu .gun:last-child {
+  margin: 0px;
 }
 
 #notlar {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#notlar ul {
-  margin: 0px;
-  padding: 0px;
+  margin-top: 100px;
 }
 #notlar li {
   margin-bottom: 10px;
-  list-style: none;
   font-size: 1.5em;
   border-bottom: 1px solid #333;
   padding-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 #notlar li:last-child {
   border-bottom: 0px;
+}
+
+#haberler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2em;
+  text-align: center;
+}
+
+#doviz {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+}
+#doviz .birim {
+  margin-right: 30px;
+  text-align: center;
+}
+#doviz li {
+  padding-right: 30px;
+  text-align: center;
+}
+#doviz li:last-child {
+  margin: 0px;
+}
+#doviz h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2.5em;
+  margin: 0px;
+  padding: 0px;
+}
+#doviz h2 {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0px;
+  padding: 0px;
+}
+#doviz h3 {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 0px;
+  padding: 0px;
 }
