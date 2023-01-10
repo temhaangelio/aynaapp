@@ -1,10 +1,10 @@
 import "./Stil.css";
-import { supabase } from "./config/supabase";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HavaDurumu from "./moduller/HavaDurumu";
 import Notlar from "./moduller/Notlar";
 import Haberler from "./moduller/Haberler";
 import Doviz from "./moduller/Doviz";
+import { supabase } from "./config/supabase";
 
 const stil = {
   profilButon: {
@@ -17,18 +17,15 @@ const stil = {
 };
 
 const Anasayfa = () => {
-  const cikis = async () => {
-    await supabase.auth.signOut();
-    await (<Navigate to={"/giris"} />);
-  };
-
+  const navitage = useNavigate();
   return (
     <div id="app">
       <button
         onClick={() => {
-          cikis();
+          supabase.auth.signOut();
         }}
-        style={stil.profilButon}>
+        className={stil}
+      >
         profil
       </button>
       <div className="modul">

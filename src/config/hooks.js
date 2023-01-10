@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../config/supabase";
 
 export const useSessionKontrol = () => {
-  const session = supabase.auth.session();
+  const session = supabase.auth.getSession();
   const [user, setUser] = useState(session?.user ?? null);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useSessionKontrol = () => {
     );
 
     return () => {
-      authListener?.unsubscribe();
+      authListener?.subscription.unsubscribe();
     };
   }, []);
 
