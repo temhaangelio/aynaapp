@@ -1,7 +1,6 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Anasayfa from "./Anasayfa";
-import Profil from "./Profil";
 import Giris from "./Giris";
 import Kaydol from "./Kaydol";
 import { useEffect, useState } from "react";
@@ -33,8 +32,7 @@ const App = () => {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Anasayfa />}></Route>
-          <Route path="/profil" element={<Profil />}></Route>
+          <Route path="/" element={<Anasayfa user={session.user} />}></Route>
           <Route path="/giris" element={<Giris />}></Route>
         </Routes>
       </BrowserRouter>

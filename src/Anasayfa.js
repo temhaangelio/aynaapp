@@ -6,32 +6,31 @@ import Haberler from "./moduller/Haberler";
 import Doviz from "./moduller/Doviz";
 import { supabase } from "./config/supabase";
 
-const stil = {
-  profilButon: {
-    position: "absolute",
-    backgroundColor: "#000",
-    color: "#fff",
-    right: 20,
-    top: 20,
-  },
-};
-
-const Anasayfa = () => {
+const Anasayfa = ({ user }) => {
   const navitage = useNavigate();
   return (
     <div id="app">
       <button
-        onClick={() => {
-          navitage("/profil");
+        style={{
+          position: "absolute",
+          right: 0,
+          right: 30,
+          top: 30,
+          padding: 10,
+          backgroundColor: "#333",
+          color: "#fff",
+          borderRadius: 10,
+          fontSize: 20,
+          cursor: "pointer",
         }}
-        className={stil}>
-        profil
+      >
+        <span className="material-symbols-outlined">settings</span>
       </button>
       <div className="modul">
         <HavaDurumu />
       </div>
       <div className="modul">
-        <Notlar />
+        <Notlar user={user} />
       </div>
       <div className="modul">
         <Haberler />

@@ -24,20 +24,22 @@ const Giris = () => {
 
   return (
     <div id="form">
-      <div className="logo">ayna</div>
+      <div className="logo">aynaayna</div>
       <form onSubmit={girisYap}>
         <input
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           type="text"
-          placeholder="Email Adresiniz"></input>
+          placeholder="Email Adresiniz"
+        ></input>
         <input
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           type="password"
-          placeholder="Şifreniz"></input>
+          placeholder="Şifreniz"
+        ></input>
         <button onClick={girisYap} style={{ marginBottom: "10px" }}>
           {yukleniyor ? "Yükleniyor" : "Giriş"}
         </button>

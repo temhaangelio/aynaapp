@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap");
 body {
   background-color: #000;
   margin: 0px;
@@ -6,7 +6,7 @@ body {
   height: 100%;
   color: #fff;
   font-size: 1em;
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
@@ -24,6 +24,12 @@ li {
   grid-template-columns: repeat(2, 50%);
   min-height: 100vh;
 }
+#profil {
+  position: relative;
+  width: 800px;
+  margin: auto;
+  padding-top: 50px;
+}
 .modul {
   padding: 5%;
   margin: auto;
@@ -32,6 +38,7 @@ li {
   justify-content: center;
   align-items: center;
   height: 40vh;
+  width: 90%;
 }
 
 #form {
@@ -63,14 +70,62 @@ li {
   margin-bottom: 5px;
 }
 #form button {
-  background-color: #000;
+  background-color: #333;
   color: #ffffff;
   padding: 15px 10px;
-  border: 1px solid #fff;
+  border: 0px;
   border-radius: 5px;
   font-size: 1em;
   cursor: pointer;
   font-weight: bold;
+}
+
+#popup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #222;
+  padding: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+#popup h1 {
+  padding: 0px;
+  margin: 30px 0px 20px 0px;
+}
+#popup .btn-kapat {
+  position: absolute;
+  padding: 0px;
+  border: 0px;
+  background-color: inherit;
+  color: #fff;
+  font-size: 30px;
+  width: auto;
+  cursor: pointer;
+  right: 20px;
+  top: 20px;
+}
+#popup .btn-ekle {
+  background-color: #000;
+  width: 100%;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 15px;
+  cursor: pointer;
+}
+#popup textarea {
+  border: 0px;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 15px;
+  font-family: "Nunito", sans-serif;
 }
 
 #havadurumu h1 {
@@ -101,9 +156,10 @@ li {
 
 #notlar {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: right;
   margin-top: 100px;
+  width: 100%;
 }
 #notlar li {
   margin-bottom: 10px;
@@ -114,6 +170,18 @@ li {
 }
 #notlar li:last-child {
   border-bottom: 0px;
+}
+#notlar button {
+  align-self: flex-end;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  width: 55px;
+  cursor: pointer;
+  text-align: center;
 }
 
 #haberler {
