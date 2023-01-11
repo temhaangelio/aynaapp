@@ -4,7 +4,12 @@ import { supabase } from "../config/supabase";
 const Notlar = ({ user }) => {
   const [notlar, setNotlar] = useState([]);
   const [yeniNot, setYeniNot] = useState(null);
-  const [popup, setPopup] = useState(false);
+  const [guncellecekNot, setGuncellenecekNot] = useState({
+    id: null,
+    not: null,
+  });
+  const [yeniPopup, setYeniPopup] = useState(false);
+  const [gosterPopup, setGosterPopup] = useState(false);
 
   useEffect(() => {
     supabase
@@ -51,21 +56,42 @@ const Notlar = ({ user }) => {
     const { data, error } = await supabase
       .from("notlar")
       .insert([{ not: yeniNot, user_id: user.id }]);
-    setPopup(false);
+    setYeniPopup(false);
+  };
+
+  const notSil = async () => {
+    const { data, error } = await supabase
+      .from("notlar")
+      .delete()
+      .eq("id", guncellecekNot.id);
+    setGosterPopup(false);
   };
 
   const notComp = (not) => {
-    return <li key={not.id}>{not.not}</li>;
+    return (
+      <li
+        onClick={() => {
+          setGosterPopup(true);
+          setGuncellenecekNot({
+            id: not.id,
+            not: not.not,
+          });
+        }}
+        key={not.id}
+      >
+        {not.not}
+      </li>
+    );
   };
 
   return (
     <div id="notlar">
-      {popup ? (
+      {yeniPopup ? (
         <div id="popup">
           <h1>Yeni Not</h1>
           <button
             onClick={() => {
-              setPopup(false);
+              setYeniPopup(false);
             }}
             className="btn-kapat"
           >
@@ -75,6 +101,7 @@ const Notlar = ({ user }) => {
             onChange={(e) => {
               setYeniNot(e.target.value);
             }}
+            placeholder="Notu buraya ekleyiniz!"
             rows={5}
           ></textarea>
 
@@ -85,14 +112,73 @@ const Notlar = ({ user }) => {
       ) : (
         ""
       )}
-      <ul>{notlar.map((not) => notComp(not))}</ul>
-      <button
-        onClick={() => {
-          setPopup(true);
-        }}
-      >
-        +
-      </button>
+
+      {gosterPopup ? (
+        <div id="popup">
+          <button
+            onClick={() => {
+              setGosterPopup(false);
+              setGuncellenecekNot({ id: null, not: null });
+            }}
+            className="btn-kapat"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+          <button
+            className="btn-link"
+            onClick={() => {
+              notSil();
+            }}
+          >
+            <span className="material-symbols-outlined">delete</span>
+          </button>
+          <textarea
+            onChange={(e) => {
+              setYeniNot(e.target.value);
+            }}
+            value={guncellecekNot.not}
+            placeholder="Notu buraya ekleyiniz!"
+            rows={5}
+          ></textarea>
+
+          <button onClick={() => notEkle()} className="btn-ekle">
+            Güncelle
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+
+      <ul>
+        {notlar.length > 0 ? (
+          notlar.map((not) => notComp(not))
+        ) : (
+          <div className="bos">
+            <span className="material-symbols-outlined">event_note</span>
+            <span>Eklenmiş bir notunuz bulunmamaktadır.</span>
+            <button
+              onClick={() => {
+                setYeniPopup(true);
+              }}
+              className="buton"
+            >
+              Yeni Not Ekle
+            </button>
+          </div>
+        )}
+      </ul>
+      {notlar.length > 0 && notlar.length < 6 ? (
+        <button
+          onClick={() => {
+            setYeniPopup(true);
+          }}
+          className="yeni"
+        >
+          +
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

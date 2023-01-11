@@ -17,6 +17,9 @@ ul {
 li {
   list-style: none;
 }
+a {
+  color: #fff;
+}
 
 #app {
   position: relative;
@@ -41,17 +44,43 @@ li {
   width: 90%;
 }
 
+.buton {
+  background-color: #333;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+.buton-link {
+  background-color: inherit;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: 800;
+}
+#logo .cerceve {
+  border: 10px solid #fff;
+  height: 150px;
+  width: 100px;
+}
+
 #form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-}
-#form .logo {
-  margin-bottom: 50px;
-  font-size: 3em;
-  font-weight: bold;
 }
 #form form {
   display: flex;
@@ -61,7 +90,7 @@ li {
 #form input {
   padding: 15px;
   width: 300px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 0px;
   border-radius: 5px;
   font-size: 1em;
@@ -96,7 +125,17 @@ li {
 }
 #popup h1 {
   padding: 0px;
-  margin: 30px 0px 20px 0px;
+  margin: 30px 0px 0px 0px;
+}
+#popup .btn-link {
+  background-color: inherit;
+  color: #fff;
+  font-size: 30px;
+  align-self: flex-start;
+  padding: 0px;
+  border: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 #popup .btn-kapat {
   position: absolute;
@@ -107,8 +146,8 @@ li {
   font-size: 30px;
   width: auto;
   cursor: pointer;
-  right: 20px;
-  top: 20px;
+  right: 30px;
+  top: 30px;
 }
 #popup .btn-ekle {
   background-color: #000;
@@ -124,7 +163,7 @@ li {
   border: 0px;
   border-radius: 5px;
   padding: 20px;
-  font-size: 15px;
+  font-size: 18px;
   font-family: "Nunito", sans-serif;
 }
 
@@ -167,11 +206,12 @@ li {
   border-bottom: 1px solid #333;
   padding-top: 5px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 #notlar li:last-child {
   border-bottom: 0px;
 }
-#notlar button {
+#notlar .yeni {
   align-self: flex-end;
   background-color: #333;
   color: #fff;
@@ -182,6 +222,25 @@ li {
   width: 55px;
   cursor: pointer;
   text-align: center;
+}
+#notlar .bos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 20px;
+  align-items: center;
+}
+#notlar .bos button {
+  font-size: 20px;
+  width: 50%;
+}
+
+#notlar .bos > .material-symbols-outlined {
+  font-size: 100px;
+}
+
+#notlar .bos > span {
+  margin: 20px 0px;
 }
 
 #haberler {

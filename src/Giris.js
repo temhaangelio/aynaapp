@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "./config/supabase";
 
 const Giris = () => {
-  const [email, setEmail] = useState("temhaangelio@gmail.com");
+  const [email, setEmail] = useState("temhaangelio@yandex.com");
   const [password, setPassword] = useState("123456");
   const [yukleniyor, setYukleniyor] = useState(false);
+  const [hata, setHata] = useState(null);
 
   const girisYap = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const Giris = () => {
       });
       if (error) throw error;
     } catch (error) {
-      console.log(error.error_description || error.message);
+      setHata(error.message);
     } finally {
       setYukleniyor(false);
     }
@@ -24,7 +26,26 @@ const Giris = () => {
 
   return (
     <div id="form">
-      <div className="logo">aynaayna</div>
+      <div id="logo">
+        <div className="cerceve"></div>
+        <span>aynaayna</span>
+      </div>
+      {hata ? (
+        <div id="popup">
+          <button
+            onClick={() => {
+              setHata(null);
+            }}
+            className="btn-kapat"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+          <h1>Hata!</h1>
+          <p>{hata}</p>
+        </div>
+      ) : (
+        ""
+      )}
       <form onSubmit={girisYap}>
         <input
           onChange={(e) => {
@@ -43,6 +64,9 @@ const Giris = () => {
         <button onClick={girisYap} style={{ marginBottom: "10px" }}>
           {yukleniyor ? "Yükleniyor" : "Giriş"}
         </button>
+        <Link to="/kaydol" style={{ marginTop: 20 }}>
+          <center>Hesabın yok mu? Kaydol!</center>
+        </Link>
       </form>
     </div>
   );
