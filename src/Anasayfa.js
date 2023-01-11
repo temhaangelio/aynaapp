@@ -22,10 +22,9 @@ const Anasayfa = () => {
     <div id="app">
       <button
         onClick={() => {
-          supabase.auth.signOut();
+          navitage("/profil");
         }}
-        className={stil}
-      >
+        className={stil}>
         profil
       </button>
       <div className="modul">

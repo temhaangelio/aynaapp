@@ -2,15 +2,15 @@ import { useState } from "react";
 import { supabase } from "./config/supabase";
 
 const Giris = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState("temhaangelio@gmail.com");
+  const [password, setPassword] = useState("123456");
   const [yukleniyor, setYukleniyor] = useState(false);
 
   const girisYap = async (e) => {
     e.preventDefault();
     try {
       await setYukleniyor(true);
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
