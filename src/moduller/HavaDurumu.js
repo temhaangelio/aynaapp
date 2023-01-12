@@ -22,7 +22,7 @@ const HavaDurumu = () => {
   const havaComp = (gun, index) => {
     if (index < 5) {
       return (
-        <div className="gun" key={gun.temp.day}>
+        <div key={gun.temp.day}>
           <h1>{gun.temp.day.toFixed(0)}°</h1>
           <span>
             {new Date(gun.dt * 1000).toLocaleDateString("tr", {
@@ -35,10 +35,14 @@ const HavaDurumu = () => {
   };
 
   return (
-    <div id="havadurumu">
-      <h1>{hava[0]?.temp.day.toFixed(0)}°</h1>
-      <div className="gunler">
-        {hava.map((gun, index) => havaComp(gun, index))}
+    <div className="d-flex flex-column justify-content-center w-100">
+      <div className="text-center">
+        <h1 style={{ fontSize: "20vh" }}>{hava[0]?.temp.day.toFixed(0)}°</h1>
+      </div>
+      <div>
+        <div className="d-flex justify-content-between text-center">
+          {hava.map((gun, index) => havaComp(gun, index))}
+        </div>
       </div>
     </div>
   );

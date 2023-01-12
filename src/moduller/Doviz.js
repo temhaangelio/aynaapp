@@ -11,15 +11,19 @@ const DovizDurumu = () => {
 
   const dovizComp = (doviz) => {
     return (
-      <li className="birim" key={doviz.birim}>
+      <div className="text-center" key={doviz.birim}>
         <h2>{doviz.birim}</h2>
         <h1>{Number(doviz.fiyat).toFixed(2)}</h1>
         <h3>{doviz.simge}</h3>
-      </li>
+      </div>
     );
   };
 
-  return <ul id="doviz">{doviz.map((doviz) => dovizComp(doviz))}</ul>;
+  return (
+    <div className="d-flex flex-row justify-content-between w-100">
+      {doviz.map((doviz) => dovizComp(doviz))}
+    </div>
+  );
 };
 
 export default DovizDurumu;

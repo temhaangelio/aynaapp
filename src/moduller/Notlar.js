@@ -3,7 +3,7 @@ import { supabase } from "../config/supabase";
 
 const Notlar = ({ user }) => {
   const [notlar, setNotlar] = useState([]);
-  const [yeniNot, setYeniNot] = useState(null);
+  const [yeniNot, setYeniNot] = useState("");
   const [guncellecekNot, setGuncellenecekNot] = useState({
     id: null,
     not: null,
@@ -94,8 +94,11 @@ const Notlar = ({ user }) => {
             not: not.not,
           });
         }}
-        key={not.id}>
-        <span class="material-symbols-outlined" style={{ marginRight: 15 }}>
+        key={not.id}
+        className="list-group-item d-flex align-items-center py-3"
+        style={{ cursor: "pointer" }}
+      >
+        <span className="material-symbols-outlined" style={{ marginRight: 15 }}>
           event_note
         </span>
         <span>{not.not}</span>
@@ -104,26 +107,40 @@ const Notlar = ({ user }) => {
   };
 
   return (
-    <div id="notlar">
+    <div className="w-100">
       {yeniPopup ? (
-        <div id="popup">
+        <div className="popup">
+          <div className="mb-3">
+            <button
+              onClick={() => {
+                setYeniPopup(false);
+              }}
+              className="btn btn-link float-end"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div>
+            <textarea
+              onChange={(e) => {
+                setYeniNot(e.target.value);
+              }}
+              placeholder="Notu buraya ekleyiniz!"
+              rows={3}
+              className="form-control"
+              maxLength={50}
+            ></textarea>
+            <small className="float-end">{yeniNot.length}/50</small>
+          </div>
           <button
-            onClick={() => {
-              setYeniPopup(false);
-            }}
-            className="btn-kapat">
-            <span className="material-symbols-outlined">close</span>
-          </button>
-          <textarea
-            style={{ marginTop: 60 }}
-            onChange={(e) => {
-              setYeniNot(e.target.value);
-            }}
-            placeholder="Notu buraya ekleyiniz!"
-            rows={5}></textarea>
-
-          <button onClick={() => notEkle()} className="btn-ekle">
-            {yukleniyor ? "Ekleniyor" : "Ekle"}
+            onClick={() => notEkle()}
+            className="btn btn-dark btn-lg mt-3"
+          >
+            {yukleniyor ? (
+              <div class="spinner-border spinner-border-sm" role="status"></div>
+            ) : (
+              "Ekle"
+            )}
           </button>
         </div>
       ) : (
@@ -131,57 +148,77 @@ const Notlar = ({ user }) => {
       )}
 
       {gosterPopup ? (
-        <div id="popup">
-          <button
-            onClick={() => {
-              setGosterPopup(false);
-              setGuncellenecekNot({ id: null, not: null });
-            }}
-            className="btn-kapat">
-            <span className="material-symbols-outlined">close</span>
-          </button>
-          <button
-            className="btn-link"
-            onClick={() => {
-              notSil();
-            }}>
-            <span className="material-symbols-outlined">delete</span>
-          </button>
-          <textarea
-            onChange={(e) => {
-              setGuncellenecekNot({
-                id: guncellecekNot.id,
-                not: e.target.value,
-              });
-            }}
-            value={guncellecekNot.not}
-            placeholder="Notu buraya ekleyiniz!"
-            rows={5}
-            maxLength="50"></textarea>
-          <span style={{ alignSelf: "flex-end", marginTop: 10 }}>
-            {guncellecekNot.not.length}/100
-          </span>
-          <button onClick={() => notGuncelle()} className="btn-ekle">
-            {yukleniyor ? "Güncelleniyor" : "Güncelle"}
+        <div className="popup">
+          <div className="mb-3">
+            <button
+              className="btn btn-dark"
+              onClick={() => {
+                notSil();
+              }}
+            >
+              {yukleniyor ? (
+                <div
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                ></div>
+              ) : (
+                <span className="material-symbols-outlined d-flex">delete</span>
+              )}
+            </button>
+            <button
+              onClick={() => {
+                setGosterPopup(false);
+                setGuncellenecekNot({ id: null, not: null });
+              }}
+              className="btn btn-link float-end"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div className="mb-3">
+            <textarea
+              onChange={(e) => {
+                setGuncellenecekNot({
+                  id: guncellecekNot.id,
+                  not: e.target.value,
+                });
+              }}
+              value={guncellecekNot.not}
+              placeholder="Notu buraya ekleyiniz!"
+              rows={3}
+              maxLength="50"
+              className="form-control form-control-lg"
+            ></textarea>
+            <span className="float-end">{guncellecekNot.not.length}/50</span>
+          </div>
+          <button onClick={() => notGuncelle()} className="btn btn-dark btn-lg">
+            {yukleniyor ? (
+              <div class="spinner-border spinner-border-sm" role="status"></div>
+            ) : (
+              "Güncelle"
+            )}
           </button>
         </div>
       ) : (
         ""
       )}
 
-      <ul>
+      <ul className="list-group list-group-flush">
         {notlar.length > 0 ? (
           notlar.map((not) => notComp(not))
         ) : (
-          <div className="bos">
-            <span className="material-symbols-outlined">event_note</span>
-            <span>Eklenmiş bir notunuz bulunmamaktadır.</span>
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <span className="material-symbols-outlined display-1">
+              event_note
+            </span>
+            <span className="my-5">Eklenmiş bir notunuz bulunmamaktadır.</span>
             <button
               onClick={() => {
                 setYeniPopup(true);
               }}
-              className="buton">
-              Yeni Not Ekle
+              className="btn btn-dark btn-lg"
+            >
+              Not Ekle
             </button>
           </div>
         )}
@@ -191,7 +228,8 @@ const Notlar = ({ user }) => {
           onClick={() => {
             setYeniPopup(true);
           }}
-          className="yeni">
+          className="btn btn-dark btn-lg float-end position-absolute bottom-0 end-0 m-3"
+        >
           +
         </button>
       ) : (

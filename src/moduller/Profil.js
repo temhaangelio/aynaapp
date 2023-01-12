@@ -26,11 +26,7 @@ const Haberler = () => {
     }, 10000);
   }, []);
 
-  return (
-    <div className="d-flex flex-column justify-content-center w-100">
-      <p className="text-center display-5">{haberler[random]?.title}</p>
-    </div>
-  );
+  return <div id="haberler">{haberler[random]?.title}</div>;
 };
 
 export default Haberler;

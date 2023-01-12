@@ -1,10 +1,10 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import Anasayfa from "./Anasayfa";
-import Giris from "./Giris";
-import Kaydol from "./Kaydol";
-import Unuttum from "./Unuttum";
-import SifreGuncelle from "./SifreGuncelle";
+import Anasayfa from "./sayfalar/Anasayfa";
+import Giris from "./sayfalar/Giris";
+import Kaydol from "./sayfalar/Kaydol";
+import Unuttum from "./sayfalar/Unuttum";
+import SifreGuncelle from "./sayfalar/SifreGuncelle";
 import { useEffect, useState } from "react";
 import { supabase } from "./config/supabase";
 

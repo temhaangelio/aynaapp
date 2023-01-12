@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { supabase } from "./config/supabase";
+import { supabase } from "../config/supabase";
 
 const SifreGuncelle = () => {
   const [sifre, setSifre] = useState(null);
@@ -38,7 +38,8 @@ const SifreGuncelle = () => {
             onClick={() => {
               setUyari(null);
             }}
-            className="btn-kapat">
+            className="btn-kapat"
+          >
             <span className="material-symbols-outlined">close</span>
           </button>
           <h1>Uyarı!</h1>
@@ -53,7 +54,8 @@ const SifreGuncelle = () => {
             setSifre(e.target.value);
           }}
           type="text"
-          placeholder="Şifreniz"></input>
+          placeholder="Şifreniz"
+        ></input>
         <button onClick={guncelle} style={{ marginBottom: "10px" }}>
           {yukleniyor ? "Yükleniyor" : "Gönder"}
         </button>

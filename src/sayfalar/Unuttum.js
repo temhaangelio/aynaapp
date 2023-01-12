@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "./config/supabase";
+import { supabase } from "../config/supabase";
+import Logo from "../components/Logo";
 
 const Giris = () => {
   const [email, setEmail] = useState(null);
@@ -31,38 +32,28 @@ const Giris = () => {
   };
 
   return (
-    <div id="form">
-      <div id="logo">
-        <div className="cerceve"></div>
-        <span>aynaayna</span>
-      </div>
-      {uyari ? (
-        <div id="popup">
-          <button
-            onClick={() => {
-              setUyari(null);
-            }}
-            className="btn-kapat">
-            <span className="material-symbols-outlined">close</span>
-          </button>
-          <h1>Uyarı!</h1>
-          <p>{uyari}</p>
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="container" style={{ maxWidth: 500 }}>
+      <Logo />
       <form onSubmit={unuttum}>
-        <input
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          type="text"
-          placeholder="Email Adresiniz"></input>
-        <button onClick={unuttum} style={{ marginBottom: "10px" }}>
+        <div className="mb-2">
+          <input
+            className="form-control form-control-lg"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            type="text"
+            placeholder="Email Adresiniz"
+          ></input>
+        </div>
+        <button
+          className="btn btn-dark btn-lg w-100 mb-5"
+          onClick={unuttum}
+          style={{ marginBottom: "10px" }}
+        >
           {yukleniyor ? "Yükleniyor" : "Gönder"}
         </button>
-        <Link to="/" style={{ marginTop: 20 }}>
-          <center>Giriş Yap!</center>
+        <Link to="/">
+          <center>Vazgeç, Giriş Yap!</center>
         </Link>
       </form>
     </div>
