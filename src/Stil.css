@@ -66,13 +66,13 @@ a {
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 800;
 }
 #logo .cerceve {
   border: 10px solid #fff;
-  height: 150px;
-  width: 100px;
+  height: 130px;
+  width: 80px;
 }
 
 #form {
@@ -201,6 +201,9 @@ a {
   width: 100%;
 }
 #notlar li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-bottom: 10px;
   font-size: 1.5em;
   border-bottom: 1px solid #333;

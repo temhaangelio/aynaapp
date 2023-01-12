@@ -10,6 +10,7 @@ const Notlar = ({ user }) => {
   });
   const [yeniPopup, setYeniPopup] = useState(false);
   const [gosterPopup, setGosterPopup] = useState(false);
+  const [yukleniyor, setYukleniyor] = useState(false);
 
   useEffect(() => {
     supabase
@@ -30,6 +31,12 @@ const Notlar = ({ user }) => {
               setNotlar((notes) =>
                 notes.filter((not) => not.id !== payload.old.id)
               );
+              break;
+            case "UPDATE":
+              setNotlar((notes) =>
+                notes.filter((not) => not.id !== payload.old.id)
+              );
+              setNotlar((notes) => [payload.new, ...notes]);
               break;
 
             default:
@@ -53,16 +60,26 @@ const Notlar = ({ user }) => {
   };
 
   const notEkle = async () => {
+    await setYukleniyor(true);
     const { data, error } = await supabase
       .from("notlar")
       .insert([{ not: yeniNot, user_id: user.id }]);
     setYeniPopup(false);
+    await setYukleniyor(false);
   };
 
   const notSil = async () => {
     const { data, error } = await supabase
       .from("notlar")
       .delete()
+      .eq("id", guncellecekNot.id);
+    setGosterPopup(false);
+  };
+
+  const notGuncelle = async () => {
+    const { data, error } = await supabase
+      .from("notlar")
+      .update({ not: guncellecekNot.not })
       .eq("id", guncellecekNot.id);
     setGosterPopup(false);
   };
@@ -77,9 +94,11 @@ const Notlar = ({ user }) => {
             not: not.not,
           });
         }}
-        key={not.id}
-      >
-        {not.not}
+        key={not.id}>
+        <span class="material-symbols-outlined" style={{ marginRight: 15 }}>
+          event_note
+        </span>
+        <span>{not.not}</span>
       </li>
     );
   };
@@ -88,25 +107,23 @@ const Notlar = ({ user }) => {
     <div id="notlar">
       {yeniPopup ? (
         <div id="popup">
-          <h1>Yeni Not</h1>
           <button
             onClick={() => {
               setYeniPopup(false);
             }}
-            className="btn-kapat"
-          >
+            className="btn-kapat">
             <span className="material-symbols-outlined">close</span>
           </button>
           <textarea
+            style={{ marginTop: 60 }}
             onChange={(e) => {
               setYeniNot(e.target.value);
             }}
             placeholder="Notu buraya ekleyiniz!"
-            rows={5}
-          ></textarea>
+            rows={5}></textarea>
 
           <button onClick={() => notEkle()} className="btn-ekle">
-            Ekle
+            {yukleniyor ? "Ekleniyor" : "Ekle"}
           </button>
         </div>
       ) : (
@@ -120,29 +137,32 @@ const Notlar = ({ user }) => {
               setGosterPopup(false);
               setGuncellenecekNot({ id: null, not: null });
             }}
-            className="btn-kapat"
-          >
+            className="btn-kapat">
             <span className="material-symbols-outlined">close</span>
           </button>
           <button
             className="btn-link"
             onClick={() => {
               notSil();
-            }}
-          >
+            }}>
             <span className="material-symbols-outlined">delete</span>
           </button>
           <textarea
             onChange={(e) => {
-              setYeniNot(e.target.value);
+              setGuncellenecekNot({
+                id: guncellecekNot.id,
+                not: e.target.value,
+              });
             }}
             value={guncellecekNot.not}
             placeholder="Notu buraya ekleyiniz!"
             rows={5}
-          ></textarea>
-
-          <button onClick={() => notEkle()} className="btn-ekle">
-            Güncelle
+            maxLength="50"></textarea>
+          <span style={{ alignSelf: "flex-end", marginTop: 10 }}>
+            {guncellecekNot.not.length}/100
+          </span>
+          <button onClick={() => notGuncelle()} className="btn-ekle">
+            {yukleniyor ? "Güncelleniyor" : "Güncelle"}
           </button>
         </div>
       ) : (
@@ -160,20 +180,18 @@ const Notlar = ({ user }) => {
               onClick={() => {
                 setYeniPopup(true);
               }}
-              className="buton"
-            >
+              className="buton">
               Yeni Not Ekle
             </button>
           </div>
         )}
       </ul>
-      {notlar.length > 0 && notlar.length < 6 ? (
+      {notlar.length > 0 && notlar.length < 5 ? (
         <button
           onClick={() => {
             setYeniPopup(true);
           }}
-          className="yeni"
-        >
+          className="yeni">
           +
         </button>
       ) : (

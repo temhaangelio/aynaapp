@@ -3,6 +3,8 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Anasayfa from "./Anasayfa";
 import Giris from "./Giris";
 import Kaydol from "./Kaydol";
+import Unuttum from "./Unuttum";
+import SifreGuncelle from "./SifreGuncelle";
 import { useEffect, useState } from "react";
 import { supabase } from "./config/supabase";
 
@@ -25,6 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Giris />}></Route>
           <Route path="/kaydol" element={<Kaydol />}></Route>
+          <Route path="/unuttum" element={<Unuttum />}></Route>
         </Routes>
       </BrowserRouter>
     );
@@ -34,6 +37,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Anasayfa user={session.user} />}></Route>
           <Route path="/giris" element={<Giris />}></Route>
+          <Route path="/sifreguncelle" element={<SifreGuncelle />}></Route>
         </Routes>
       </BrowserRouter>
     );

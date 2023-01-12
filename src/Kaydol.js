@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { supabase } from "./config/supabase";
 
 const Kaydol = () => {
@@ -10,7 +10,7 @@ const Kaydol = () => {
   const [passwordTekrar, setPasswordTekrar] = useState(null);
   const [token, setToken] = useState(null);
   const [yukleniyor, setYukleniyor] = useState(false);
-  const [hata, setHata] = useState(null);
+  const [uyari, setUyari] = useState(null);
 
   const kaydol = (e) => {
     e.preventDefault();
@@ -26,9 +26,10 @@ const Kaydol = () => {
           },
         },
       });
+      <Navigate replace to="/" />;
       if (error) throw error;
     } catch (error) {
-      console.log(error.error_description || error.message);
+      console.log(error);
     } finally {
       setYukleniyor(false);
     }
@@ -40,18 +41,17 @@ const Kaydol = () => {
         <div className="cerceve"></div>
         <span>aynaayna</span>
       </div>
-      {hata !== null ? (
+      {uyari !== null ? (
         <div id="popup">
           <button
             onClick={() => {
-              setHata(null);
+              setUyari(null);
             }}
-            className="btn-kapat"
-          >
+            className="btn-kapat">
             <span className="material-symbols-outlined">close</span>
           </button>
-          <h1>Hata!</h1>
-          <p>{hata}</p>
+          <h1>Uyarı!</h1>
+          <p>{uyari}</p>
         </div>
       ) : (
         ""
@@ -63,45 +63,39 @@ const Kaydol = () => {
           }}
           type="text"
           placeholder="İsminiz"
-          maxLength={50}
-        ></input>
+          maxLength={50}></input>
         <input
           onChange={(e) => {
             setTelefon(e.target.value);
           }}
           type="text"
           placeholder="Telefon Numaranız"
-          maxLength={50}
-        ></input>
+          maxLength={50}></input>
         <input
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           type="text"
           placeholder="Email Adresiniz"
-          maxLength={50}
-        ></input>
+          maxLength={50}></input>
         <input
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           type="password"
-          placeholder="Şifreniz"
-        ></input>
+          placeholder="Şifreniz"></input>
         <input
           onChange={(e) => {
             setPasswordTekrar(e.target.value);
           }}
           type="password"
-          placeholder="Şifreniz Tekrar"
-        ></input>
+          placeholder="Şifreniz Tekrar"></input>
         <input
           onChange={(e) => {
             setToken(e.target.value);
           }}
           type="text"
-          placeholder="Token"
-        ></input>
+          placeholder="Token"></input>
         <button onClick={kaydol} style={{ marginBottom: "10px" }}>
           {yukleniyor ? "Yükleniyor" : "Kaydol"}
         </button>

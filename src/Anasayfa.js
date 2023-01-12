@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 const Anasayfa = ({ user }) => {
   const [profilPopup, setProfilPopup] = useState(false);
+  const [modullerPopup, setModullerPopup] = useState(false);
+
   return (
     <div id="app">
       <button
@@ -27,8 +29,7 @@ const Anasayfa = ({ user }) => {
         }}
         onClick={() => {
           setProfilPopup(true);
-        }}
-      >
+        }}>
         <span className="material-symbols-outlined">settings</span>
       </button>
       {profilPopup ? (
@@ -37,18 +38,16 @@ const Anasayfa = ({ user }) => {
             onClick={() => {
               setProfilPopup(false);
             }}
-            className="btn-kapat"
-          >
+            className="btn-kapat">
             <span className="material-symbols-outlined">close</span>
           </button>
           <span
             class="material-symbols-outlined"
-            style={{ fontSize: 100, marginTop: 30 }}
-          >
+            style={{ fontSize: 150, marginTop: 30 }}>
             face
           </span>
+          <h1>{user.user_metadata.isim}</h1>
           <p>
-            <strong>{user.user_metadata.isim}</strong>
             <small>
               <br />
               {user.email}
@@ -58,24 +57,39 @@ const Anasayfa = ({ user }) => {
           <button
             className="buton"
             onClick={() => {
-              supabase.auth.signOut();
+              setProfilPopup(false);
+              setModullerPopup(true);
             }}
-            style={{ marginBottom: 10, marginTop: 30 }}
-          >
+            style={{ marginBottom: 10, marginTop: 30 }}>
             Modüller
           </button>
           <button
             className="buton"
             onClick={() => {
               supabase.auth.signOut();
-            }}
-          >
+            }}>
             Çıkış Yap
           </button>
         </div>
       ) : (
         ""
       )}
+
+      {modullerPopup ? (
+        <div id="popup" style={{ textAlign: "center" }}>
+          <button
+            onClick={() => {
+              setModullerPopup(false);
+            }}
+            className="btn-kapat">
+            <span className="material-symbols-outlined">close</span>
+          </button>
+          modüller
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="modul">
         <HavaDurumu />
       </div>

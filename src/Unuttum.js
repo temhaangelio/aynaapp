@@ -3,28 +3,24 @@ import { Link } from "react-router-dom";
 import { supabase } from "./config/supabase";
 
 const Giris = () => {
-  const [email, setEmail] = useState("temhaangelio@yandex.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState(null);
   const [yukleniyor, setYukleniyor] = useState(false);
   const [uyari, setUyari] = useState(null);
 
-  const girisYap = async (e) => {
+  const unuttum = async (e) => {
     e.preventDefault();
     try {
       await setYukleniyor(true);
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "http://localhost:3000/sifreguncelle",
       });
-      if (error) throw error;
+      if (error) {
+        throw error;
+      } else {
+        setUyari("Lütfen email adresinizi kontrol ediniz!");
+      }
     } catch (error) {
       switch (error.message) {
-        case "Email not confirmed":
-          setUyari("Email adresinizi onaylamanız gerekmektedir!");
-          break;
-        case "Invalid login credentials":
-          setUyari("Hatalı email veya şifre!");
-          break;
         default:
           setUyari(error.message);
           break;
@@ -55,27 +51,18 @@ const Giris = () => {
       ) : (
         ""
       )}
-      <form onSubmit={girisYap}>
+      <form onSubmit={unuttum}>
         <input
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           type="text"
           placeholder="Email Adresiniz"></input>
-        <input
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          type="password"
-          placeholder="Şifreniz"></input>
-        <button onClick={girisYap} style={{ marginBottom: "10px" }}>
+        <button onClick={unuttum} style={{ marginBottom: "10px" }}>
           {yukleniyor ? "Yükleniyor" : "Gönder"}
         </button>
-        <Link to="/kaydol" style={{ marginTop: 20 }}>
-          <center>Hesabın yok mu? Kaydol!</center>
-        </Link>
-        <Link to="/unuttum" style={{ marginTop: 20 }}>
-          <center>Şifremi Unuttum?</center>
+        <Link to="/" style={{ marginTop: 20 }}>
+          <center>Giriş Yap!</center>
         </Link>
       </form>
     </div>
