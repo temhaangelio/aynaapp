@@ -5,10 +5,11 @@ body {
   padding: 0px;
   height: 100%;
   color: #fff;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-family: "Nunito", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  texttransform: "initial" !important;
 }
 ul {
   margin: 0px;

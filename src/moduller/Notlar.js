@@ -96,8 +96,7 @@ const Notlar = ({ user }) => {
         }}
         key={not.id}
         className="list-group-item d-flex align-items-center py-3"
-        style={{ cursor: "pointer" }}
-      >
+        style={{ cursor: "pointer" }}>
         <span className="material-symbols-outlined" style={{ marginRight: 15 }}>
           event_note
         </span>
@@ -115,8 +114,7 @@ const Notlar = ({ user }) => {
               onClick={() => {
                 setYeniPopup(false);
               }}
-              className="btn btn-link float-end"
-            >
+              className="btn btn-link float-end">
               <span className="material-symbols-outlined">close</span>
             </button>
           </div>
@@ -128,14 +126,12 @@ const Notlar = ({ user }) => {
               placeholder="Notu buraya ekleyiniz!"
               rows={3}
               className="form-control"
-              maxLength={50}
-            ></textarea>
+              maxLength={50}></textarea>
             <small className="float-end">{yeniNot.length}/50</small>
           </div>
           <button
             onClick={() => notEkle()}
-            className="btn btn-dark btn-lg mt-3"
-          >
+            className="btn btn-dark btn-lg mt-3">
             {yukleniyor ? (
               <div class="spinner-border spinner-border-sm" role="status"></div>
             ) : (
@@ -154,13 +150,11 @@ const Notlar = ({ user }) => {
               className="btn btn-dark"
               onClick={() => {
                 notSil();
-              }}
-            >
+              }}>
               {yukleniyor ? (
                 <div
                   class="spinner-border spinner-border-sm"
-                  role="status"
-                ></div>
+                  role="status"></div>
               ) : (
                 <span className="material-symbols-outlined d-flex">delete</span>
               )}
@@ -170,8 +164,7 @@ const Notlar = ({ user }) => {
                 setGosterPopup(false);
                 setGuncellenecekNot({ id: null, not: null });
               }}
-              className="btn btn-link float-end"
-            >
+              className="btn btn-link float-end">
               <span className="material-symbols-outlined">close</span>
             </button>
           </div>
@@ -187,13 +180,14 @@ const Notlar = ({ user }) => {
               placeholder="Notu buraya ekleyiniz!"
               rows={3}
               maxLength="50"
-              className="form-control form-control-lg"
-            ></textarea>
+              className="form-control form-control-lg"></textarea>
             <span className="float-end">{guncellecekNot.not.length}/50</span>
           </div>
           <button onClick={() => notGuncelle()} className="btn btn-dark btn-lg">
             {yukleniyor ? (
-              <div class="spinner-border spinner-border-sm" role="status"></div>
+              <div
+                className="spinner-border spinner-border-sm"
+                role="status"></div>
             ) : (
               "Güncelle"
             )}
@@ -216,8 +210,7 @@ const Notlar = ({ user }) => {
               onClick={() => {
                 setYeniPopup(true);
               }}
-              className="btn btn-dark btn-lg"
-            >
+              className="btn btn-dark btn-lg">
               Not Ekle
             </button>
           </div>
@@ -228,9 +221,8 @@ const Notlar = ({ user }) => {
           onClick={() => {
             setYeniPopup(true);
           }}
-          className="btn btn-dark btn-lg float-end position-absolute bottom-0 end-0 m-3"
-        >
-          +
+          className="d-flex p-3 btn btn-dark btn-lg float-end position-absolute bottom-0 end-0 m-3">
+          <span className="material-symbols-outlined">add</span>
         </button>
       ) : (
         ""

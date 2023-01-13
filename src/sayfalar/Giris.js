@@ -48,8 +48,7 @@ const Giris = () => {
             }}
             type="text"
             placeholder="Email Adresiniz"
-            className="form-control form-control-lg"
-          ></input>
+            className="form-control form-control-lg"></input>
         </div>
         <div className="mb-2">
           <input
@@ -58,15 +57,20 @@ const Giris = () => {
             }}
             type="password"
             placeholder="Şifreniz"
-            className="form-control form-control-lg"
-          ></input>
+            className="form-control form-control-lg"></input>
         </div>
         <button
+          disabled={email && password ? false : true}
           className="btn btn-dark btn-lg w-100 mt-3"
           onClick={girisYap}
-          style={{ marginBottom: "10px" }}
-        >
-          {yukleniyor ? "Yükleniyor" : "Gönder"}
+          style={{ marginBottom: "10px" }}>
+          {yukleniyor ? (
+            <div
+              className="spinner-border spinner-border-sm"
+              role="status"></div>
+          ) : (
+            "Gönder"
+          )}
         </button>
         <div className="mt-5">
           <Link to="/kaydol">

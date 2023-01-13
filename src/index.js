@@ -4,7 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+
+const AlertTemplate = ({ style, options, message, close }) => (
+  <div
+    className="d-flex flex-row bg-dark p-3 m-3"
+    style={{ borderRadius: 10, zIndex: 1000 }}>
+    <span
+      style={{ paddingRight: 10, marginTop: 3 }}
+      className="material-symbols-outlined">
+      info
+    </span>
+    <span>{message}</span>
+  </div>
+);
 
 const options = {
   position: positions.TOP_RIGHT,

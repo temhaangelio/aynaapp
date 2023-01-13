@@ -28,7 +28,9 @@ const Haberler = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center w-100">
-      <p className="text-center display-5">{haberler[random]?.title}</p>
+      <p className="text-center" style={{ fontSize: "2em", lineHeight: 1.3 }}>
+        {haberler[random]?.title}
+      </p>
     </div>
   );
 };
